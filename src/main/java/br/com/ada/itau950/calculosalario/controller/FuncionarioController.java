@@ -6,6 +6,7 @@ import br.com.ada.itau950.calculosalario.dto.FuncionarioSaveResponseDTO;
 import br.com.ada.itau950.calculosalario.entity.Cargo;
 import br.com.ada.itau950.calculosalario.entity.Funcionario;
 import br.com.ada.itau950.calculosalario.service.FuncionarioService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

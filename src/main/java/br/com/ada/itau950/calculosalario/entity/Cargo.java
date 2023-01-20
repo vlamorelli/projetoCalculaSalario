@@ -6,6 +6,7 @@ import lombok.Setter;
 
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,6 +21,6 @@ public class Cargo {
     private BigDecimal salario;
 
     @OneToMany(mappedBy = "cargo")
-    private Funcionario funcionario;
+    private Set<Funcionario> funcionario;
 
 }

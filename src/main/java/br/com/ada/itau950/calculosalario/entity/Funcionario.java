@@ -19,8 +19,7 @@ public class Funcionario {
     private String cpf;
     private BigDecimal bonusSalarial;
 
-    @OneToMany(mappedBy = "idCargo")
-    @JoinColumn(name = "cargo_id", referencedColumnName = "id")
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @JoinColumn(name = "cargo_id")
+    @ManyToOne
     private Cargo cargo;
 }
