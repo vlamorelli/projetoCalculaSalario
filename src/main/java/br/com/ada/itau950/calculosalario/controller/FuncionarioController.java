@@ -1,5 +1,6 @@
 package br.com.ada.itau950.calculosalario.controller;
 
+import br.com.ada.itau950.calculosalario.dto.CargoResponseDTO;
 import br.com.ada.itau950.calculosalario.dto.FuncionarioResponseDTO;
 import br.com.ada.itau950.calculosalario.dto.FuncionarioSaveRequestDTO;
 import br.com.ada.itau950.calculosalario.dto.FuncionarioSaveResponseDTO;
@@ -37,7 +38,8 @@ public class FuncionarioController {
         funcionario.setNome(funcionarioRequest.getNome());
         funcionario.setCpf(funcionarioRequest.getCpf());
         funcionario.setBonusSalarial(funcionarioRequest.getBonusSalarial());
-        funcionario.setCargo(funcionarioRequest.getCargo());
+        funcionario.setCargo(new Cargo());
+        funcionario.getCargo().setIdCargo(funcionarioRequest.getIdCargo());
 
         funcionario = funcionarioService.save(funcionario);
 
@@ -56,8 +58,11 @@ public class FuncionarioController {
             funcionarioDto.setNome(funcionario.get().getNome());
             funcionarioDto.setCpf(funcionario.get().getCpf());
             funcionarioDto.setBonusSalarial(funcionario.get().getBonusSalarial());
-            funcionarioDto.setCargo(funcionario.get().getCargo());
-            //funcionarioDto.setIdFunc(id);
+            funcionarioDto.setCargo(new CargoResponseDTO());
+            funcionarioDto.getCargo().setIdCargo(funcionario.get().getCargo().getIdCargo());
+            funcionarioDto.getCargo().setNome(funcionario.get().getCargo().getNome());
+            funcionarioDto.getCargo().setSalario(funcionario.get().getCargo().getSalario());
+            funcionarioDto.setIdFunc(id);
             return ResponseEntity.ok(funcionarioDto);
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -96,7 +101,26 @@ public class FuncionarioController {
 
     @GetMapping
     public ResponseEntity<List<FuncionarioResponseDTO>> findAll() {
-        //select
-        return ResponseEntity.ok(new ArrayList<>());
+
+
+        List<Funcionario> funcionarios = funcionarioService.findAll();
+        List<FuncionarioResponseDTO> funcionarioResponseDTOS = new ArrayList<>();
+
+        for (Funcionario funcionario: funcionarios) {
+            FuncionarioResponseDTO funcionarioResponseDto = new FuncionarioResponseDTO();
+            funcionarioResponseDto.setNome(funcionario.getNome());
+            funcionarioResponseDto.setBonusSalarial(funcionario.getBonusSalarial());
+            funcionarioResponseDto.setCpf(funcionario.getCpf());
+            funcionarioResponseDto.setIdFunc(funcionario.getIdFunc());
+            funcionarioResponseDto.setCargo(new CargoResponseDTO());
+            funcionarioResponseDto.getCargo().setIdCargo(funcionario.getCargo().getIdCargo());
+            funcionarioResponseDto.getCargo().setNome(funcionario.getCargo().getNome());
+            funcionarioResponseDto.getCargo().setSalario(funcionario.getCargo().getSalario());
+
+            funcionarioResponseDTOS.add(funcionarioResponseDto);
+        }
+
+        return ResponseEntity.ok(funcionarioResponseDTOS);
+
     }
 }

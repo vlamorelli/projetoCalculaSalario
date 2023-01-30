@@ -55,7 +55,7 @@ public class CargoController {
             CargoResponseDTO cargoResponseDto = new CargoResponseDTO();
             cargoResponseDto.setNome(cargo.get().getNome());
             cargoResponseDto.setSalario(cargo.get().getSalario());
-            //cargoResponseDto.setIdCargo(id);
+            cargoResponseDto.setIdCargo(id);
             return ResponseEntity.ok(cargoResponseDto);
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -93,8 +93,20 @@ public class CargoController {
 
     @GetMapping
     public ResponseEntity<List<CargoResponseDTO>> findAll() {
-        //select
-        return ResponseEntity.ok(new ArrayList<>());
+
+        List<Cargo> cargos = cargoService.findAll();
+        List<CargoResponseDTO> cargoResponseDTOS = new ArrayList<>();
+
+        for (Cargo cargo: cargos) {
+            CargoResponseDTO cargoResponseDto = new CargoResponseDTO();
+            cargoResponseDto.setNome(cargo.getNome());
+            cargoResponseDto.setSalario(cargo.getSalario());
+            cargoResponseDto.setIdCargo(cargo.getIdCargo());
+
+            cargoResponseDTOS.add(cargoResponseDto);
+        }
+
+        return ResponseEntity.ok(cargoResponseDTOS);
     }
 
 }

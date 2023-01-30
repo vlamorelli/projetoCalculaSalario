@@ -30,7 +30,7 @@ public class FuncionarioSaveRequestDTO {
     private BigDecimal bonusSalarial;
 
     @NotNull
-    private Cargo cargo;
+    private long idCargo;
 
 
 }

@@ -2,6 +2,7 @@ package br.com.ada.itau950.calculosalario.service;
 
 import br.com.ada.itau950.calculosalario.entity.Cargo;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CargoService {
@@ -11,4 +12,6 @@ public interface CargoService {
     Optional<Cargo> findById (Long idCargo);
 
     void delete (Long idCargo);
+
+    List<Cargo> findAll ();
 }

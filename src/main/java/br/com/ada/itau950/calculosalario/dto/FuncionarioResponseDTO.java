@@ -16,7 +16,7 @@ public class FuncionarioResponseDTO {
     private String nome;
     private String cpf;
     private BigDecimal bonusSalarial;
-    private Cargo cargo;
+    private CargoResponseDTO cargo;
 
     }
 
